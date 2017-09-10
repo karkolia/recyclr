@@ -22,6 +22,17 @@ To implement it, you have 3 simple steps:
 
 - Create a ViewHolder class extending *Recyclr.Holder* with all the views bound with Butterknife annotations
 
+```
+public class ViewHolder extends Recyclr.Holder {
+	@BindView(R.id.name) public TextView nameTv;
+	@BindView(R.id.description) public TextView descTv;
+
+	ViewHolder(View itemView) {
+		super(itemView);
+	}
+}
+```
+
 - Call Recyclr to init the recyclr object with your parameters and recycler view:
 
 ```
@@ -43,7 +54,7 @@ Then we call the viewHolder method with 2 parameters.
 
 Don't forget to keep a reference to the newly created object to be able to pass the items to it
 
-- Handle the items list to the recyclr object:
+- Provide the items list to the recyclr object:
 ```
 recyclr.items(itemsList)
 ```
