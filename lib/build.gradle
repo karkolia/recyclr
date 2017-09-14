@@ -1,8 +1,25 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+
+  dependencies {
+    classpath 'me.tatarka:gradle-retrolambda:3.7.0'
+  }
+}
+
+// Required because retrolambda is on maven central
+repositories {
+  mavenCentral()
+}
+
+apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.android.library'
+
 ext {
   PUBLISH_GROUP_ID = 'com.koliadev.view'
   PUBLISH_ARTIFACT_ID = 'recyclr'
-  PUBLISH_VERSION = '0.3.0'
+  PUBLISH_VERSION = '0.1.0'
 }
 android {
   compileSdkVersion 25
@@ -12,7 +29,7 @@ android {
     minSdkVersion 15
     targetSdkVersion 25
     versionCode 1
-    versionName "1.0"
+    versionName "0.1.0"
 
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
@@ -29,7 +46,7 @@ dependencies {
   compile 'com.android.support:recyclerview-v7:25.3.1'
   compile 'com.jakewharton:butterknife:8.8.1'
   annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-  compile 'com.android.support:appcompat-v7:25.3.1'
 
   apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
+  testCompile 'junit:junit:4.12'
 }

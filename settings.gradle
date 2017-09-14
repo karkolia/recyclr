@@ -1,1 +1,1 @@
-include ':app', ':recyclr'
+include ':lib', ':example', ':example'
