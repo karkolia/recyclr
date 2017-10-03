@@ -16,6 +16,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
   @BindView(R.id.recycler_view) public RecyclerView recyclerView;
+  
+  private Recyclr<MyViewHolder, MyItem> recyclr;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -34,8 +36,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void initList() {
-    Recyclr<MyViewHolder, MyItem> recyclr = Recyclr.from(recyclerView);
-    recyclr
+    recyclr = Recyclr.<MyViewHolder, MyItem>from(recyclerView)
         .layout(R.layout.list_item)
         .viewHolder(MyViewHolder::new, (holder, item) -> {
           holder.nameTv.setText(item.getName());
