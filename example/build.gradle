@@ -52,6 +52,6 @@ dependencies {
   annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
   testCompile 'junit:junit:4.12'
 
-  compile 'com.koliadev.view:recyclr:0.1.0'
-//  compile project(':lib')
+  //  compile 'com.koliadev.view:recyclr:0.1.0'
+  compile project(':lib')
 }
