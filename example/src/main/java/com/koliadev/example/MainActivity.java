@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
   @BindView(R.id.recycler_view) public RecyclerView recyclerView;
-  private Recyclr recyclr;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
