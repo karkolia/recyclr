@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
   @BindView(R.id.recycler_view) public RecyclerView recyclerView;
-  
+
   private Recyclr<MyViewHolder, MyItem> recyclr;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +36,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void initList() {
-    recyclr = Recyclr.<MyViewHolder, MyItem>from(recyclerView)
-        .layout(R.layout.list_item)
+    recyclr = Recyclr.<MyViewHolder, MyItem>from(recyclerView).layout(R.layout.list_item)
         .viewHolder(MyViewHolder::new, (holder, item) -> {
           holder.nameTv.setText(item.getName());
           holder.descriptionTv.setText(item.getDescription());
@@ -51,8 +50,7 @@ public class MainActivity extends AppCompatActivity {
     for (int i = 0; i < 18; i++) {
       MyItem testData = new MyItem();
       testData.setName("NAME_" + i);
-      testData.setDescription(
-          "jqshdfljkqhs fqhsd fjq sjdfoqsjdhf qhsdufo iuqhsd fiuhqs oidfuqsodfu qodfoqisduh " + i);
+      testData.setDescription("jqshdfljkqhs fqhsd fjq sjdfoqsjdhf qhsdufo iuqhsd fiuhqs oidfuqsodfu qodfoqisduh " + i);
       datas.add(testData);
     }
     return datas;
