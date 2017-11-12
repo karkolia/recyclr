@@ -23,12 +23,12 @@ public class Recyclr<T extends Recyclr.Holder, U> {
   private int layoutId;
   private Adapter adapter;
   private RecyclerView recyclerView;
-  private Maker maker;
-  private Binder binder;
+  private Maker<T> maker;
+  private Binder<T, U> binder;
   private ArrayList<U> items;
 
-  public static Recyclr from(RecyclerView recyclerView) {
-    Recyclr recyclr = new Recyclr();
+  public static <T extends Recyclr.Holder, U> Recyclr<T, U> from(RecyclerView recyclerView) {
+    Recyclr<T, U> recyclr = new Recyclr<>();
     recyclr.recyclerView = recyclerView;
     recyclr.context = recyclerView.getContext();
     recyclr.initRecyclerView();
@@ -41,14 +41,14 @@ public class Recyclr<T extends Recyclr.Holder, U> {
     recyclerView.setItemAnimator(new DefaultItemAnimator());
   }
 
-  public Recyclr layout(@LayoutRes int layoutId) {
+  public Recyclr<T, U> layout(@LayoutRes int layoutId) {
     this.layoutId = layoutId;
     this.adapter = new Adapter(context);
     recyclerView.setAdapter(adapter);
     return this;
   }
 
-  public Recyclr viewHolder(Maker maker, Binder binder) {
+  public Recyclr<T, U> viewHolder(Maker<T> maker, Binder<T, U> binder) {
     this.maker = maker;
     this.binder = binder;
     return this;
@@ -75,7 +75,7 @@ public class Recyclr<T extends Recyclr.Holder, U> {
     }
   }
 
-  private class Adapter extends RecyclerView.Adapter<ViewHolder> {
+  private class Adapter extends RecyclerView.Adapter<T> {
 
     private final LayoutInflater inflater;
 
@@ -83,12 +83,12 @@ public class Recyclr<T extends Recyclr.Holder, U> {
       this.inflater = LayoutInflater.from(context);
     }
 
-    @Override public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @Override public T onCreateViewHolder(ViewGroup parent, int viewType) {
       return maker.onCreate(inflater.inflate(layoutId, null));
     }
 
-    @Override public void onBindViewHolder(ViewHolder holder, int position) {
-      binder.onBind((T) holder, items.get(position));
+    @Override public void onBindViewHolder(T holder, int position) {
+      binder.onBind(holder, items.get(position));
     }
 
     @Override public int getItemCount() {
