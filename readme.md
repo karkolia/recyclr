@@ -23,14 +23,14 @@ Gradle
 
 To add this library to your project, just add the following line to your gradle file:
 ```
-compile 'com.koliadev.view:recyclr:0.1.0'
+compile 'com.koliadev.view:recyclr:0.1.1'
 ```
 
 > **Note:**
 >
 > In case your project already uses Butterknife library, use these lines instead:
 ```
-compile 'com.koliadev.view:recyclr:0.1.0', {
+compile 'com.koliadev.view:recyclr:0.1.1', {
 	exclude group: 'com.jakewharton'
 }
 ```
@@ -57,13 +57,11 @@ public class ViewHolder extends Recyclr.Holder {
 - Call Recyclr to init the recyclr object with your parameters and recycler view:
 
 ```
-recyclr = Recyclr.from(recyclerView)
+recyclr = Recyclr.<MyViewHolder, MyModel>from(recyclerView)
 .layout(R.layout.list_item)
-.viewHolder(ViewHolder::new, (holder, item) -> {
-  ViewHolder vh = (ViewHolder) holder;
-  Model model = (Model) item;
-  vh.nameTv.setText(model.getName());
-  vh.descriptionTv.setText(model.getDescription());
+.viewHolder(MyViewHolder::new, (myHolder, myModel) -> {
+  myHolder.nameTv.setText(myModel.getName());
+  myHolder.descriptionTv.setText(myModel.getDescription());
 });
 ```
 Here we call Recyclr passing the recycler view as parameter to from() method.
@@ -75,7 +73,7 @@ Then we call the viewHolder method with 2 parameters.
 
 Don't forget to keep a reference to the newly created object to be able to pass the items to it
 
-- Provide the items list to the recyclr object:
+- Provide the models list to the recyclr object:
 ```
 recyclr.items(itemsList)
 ```
